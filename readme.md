@@ -77,7 +77,7 @@ CREATE TABLE `invoice` (
 finally Build and run the application.
 
 
-##Sample application properties file 
+## Sample application properties file 
 
 ```
 server.port=8084
