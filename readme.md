@@ -16,7 +16,7 @@ This project is designed to generate and store invoices in different formats, in
 
 The following API endpoints are available:
 
-* `POST /invoices/generate` - create a new invoice and stores locally using the json input of a specific pattern
+* `POST /invoice/generate` - create a new invoice and stores locally using the json input of a specific pattern
 
 ```json
 {
@@ -43,7 +43,7 @@ The following API endpoints are available:
 }
 ```
  
-* `GET /invoices/download/?documentId={documentId}&displayFormat={displayFormat}` - get the document for an invoice by ID in the specified display format
+* `GET /invoice/download/?documentId={documentId}&displayFormat={displayFormat}` - get the document for an invoice by ID in the specified display format
 
 ## API documentation
 
