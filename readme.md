@@ -16,7 +16,7 @@ This project is designed to generate and store invoices in different formats, in
 
 The following API endpoints are available:
 
-* `POST /invoices/generate` - create a new invoice and stores locally using the json input of a specific pattern
+* `POST /invoice/generate` - create a new invoice and stores locally using the json input of a specific pattern
 
 ```json
 {
@@ -43,7 +43,7 @@ The following API endpoints are available:
 }
 ```
  
-* `GET /invoices/download/?documentId={documentId}&displayFormat={displayFormat}` - get the document for an invoice by ID in the specified display format
+* `GET /invoice/download/?documentId={documentId}&displayFormat={displayFormat}` - get the document for an invoice by ID in the specified display format
 
 ## API documentation
 
@@ -77,7 +77,7 @@ CREATE TABLE `invoice` (
 finally Build and run the application.
 
 
-##Sample application properties file 
+## Sample application properties file 
 
 ```
 server.port=8084
@@ -110,7 +110,7 @@ The following technologies were used in this project:
 ## Architecture
 This project is built using Spring Boot and follows a RESTful API design. Any front-end framework can be used to communicate with the back-end through HTTP requests.
 
-##Contributing
+## Contributing
 If you'd like to contribute to this project, please follow these steps:
 
 1. Fork this repository.
