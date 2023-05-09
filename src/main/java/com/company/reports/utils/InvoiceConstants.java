@@ -2,9 +2,10 @@ package com.company.reports.utils;
 
 public class InvoiceConstants {
 	
-	public static final String INVOICE_BASE_URL = "/invoice";
+	public static final String INVOICES_BASE_URL = "/invoices";
     public static final String ENDPOINT_GENERATE = "/generate";
     public static final String ENDPOINT_DOWNLOAD = "/download";
+    public static final String ROOT_ENDPOINT 	 = "/";
     
     
     public static final String DISPLAY_FORMAT_DIRECTORY_PDF = "/pdf/";

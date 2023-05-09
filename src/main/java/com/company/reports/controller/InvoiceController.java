@@ -1,12 +1,12 @@
 package com.company.reports.controller;
 
 import static com.company.reports.utils.InvoiceConstants.ENDPOINT_DOWNLOAD;
-import static com.company.reports.utils.InvoiceConstants.ENDPOINT_GENERATE;
 import static com.company.reports.utils.InvoiceConstants.ERROR_MSG_DOCUMENT_GENERATION;
 import static com.company.reports.utils.InvoiceConstants.ERROR_MSG_DOCUMENT_NOT_FOUND;
 import static com.company.reports.utils.InvoiceConstants.ERROR_MSG_DOWNLOAD_INVOICE;
 import static com.company.reports.utils.InvoiceConstants.ERROR_MSG_INVALID_DISPLAY_FORMAT;
-import static com.company.reports.utils.InvoiceConstants.INVOICE_BASE_URL;
+import static com.company.reports.utils.InvoiceConstants.INVOICES_BASE_URL;
+import static com.company.reports.utils.InvoiceConstants.ROOT_ENDPOINT;
 import static com.company.reports.utils.InvoiceConstants.SUCCESS_MSG_DOWNLOAD_INVOICE;
 import static com.company.reports.utils.JasperReportConstants.DISPLAY_FORMAT_PDF;
 
@@ -29,11 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.company.reports.exceptions.InvalidDisplayFormatException;
 import com.company.reports.service.InvoiceService;
+import com.company.reports.utils.InvoiceConstants;
 import com.company.reports.utils.ResponseBuilder;
 import com.company.reports.vo.InvoiceDataVo;
 
 @RestController
-@RequestMapping(INVOICE_BASE_URL)
+@RequestMapping(INVOICES_BASE_URL)
 public class InvoiceController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(InvoiceController.class);
@@ -44,7 +45,7 @@ public class InvoiceController {
 	@Autowired
 	private ResponseBuilder responseBuilder;
 
-    @PostMapping(ENDPOINT_GENERATE)
+    @PostMapping
     public ResponseEntity<?> generateInvoice(@RequestBody InvoiceDataVo invoiceData) {
     	 JSONObject responseObject = null;
         try {
