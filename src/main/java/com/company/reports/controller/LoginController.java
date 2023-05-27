@@ -1,5 +1,6 @@
 package com.company.reports.controller;
 
+import com.company.reports.vo.TokenVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,12 @@ public class LoginController {
 	LoginService loginService;
 	
 	@PostMapping
-    public ResponseEntity<String> login(@RequestBody LoginVo loginVo) throws AuthenticationException {
+    public ResponseEntity<?> login(@RequestBody LoginVo loginVo) throws AuthenticationException {
         String username = loginVo.getUsername();
         String password = loginVo.getPassword();
 
-        String token = loginService.login(username, password);
-        return ResponseEntity.ok(token);
+      TokenVo tokens =  loginService.login(username, password);
+        return ResponseEntity.ok(tokens);
     }
 
     @ExceptionHandler(AuthenticationException.class)

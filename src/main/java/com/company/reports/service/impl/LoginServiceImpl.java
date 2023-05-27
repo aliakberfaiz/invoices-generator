@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import antlr.Token;
+import com.company.reports.service.TokenService;
+import com.company.reports.vo.TokenVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,21 +22,25 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-    private static final long EXPIRATION_TIME = 86400000; // 24 hours
-    private static final String SECRET_KEY = "hiihsickueousctrjajdksfnkjasdjfjkansdfunBFSDUHUDSAIKHDAKLSALHDhLSKDSAKHJKASLSHDLASKDHJKALSDKXNCZ<XMCNSAIUDQWIEHIOPIWEIOPUWQOEIUPQWEUIPOQWUEOPWQUEselfdodlosp"; //TODO change with the App config
 
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TokenService tokenService;
+
     @SuppressWarnings("serial")
 	@Override
-    public String login(String username, String password) throws AuthenticationException {
+    public TokenVo login(String username, String password) throws AuthenticationException {
         try {
             String encodedPassword = userService.getPasswordByUsername(username);
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    	    if(encoder.matches(password, encodedPassword))
-    	    	return generateJwtToken(username);
+    	    if(encoder.matches(password, encodedPassword)){
+                String token = tokenService.generateJwtToken(username);
+                String refreshToken = tokenService.generateRefreshToken(username);
+                return  new TokenVo(token, refreshToken);
+            }
     	    else
     	    	throw new AuthenticationException("Invalid password") {};
         } catch (UsernameNotFoundException ex) {
@@ -41,16 +48,6 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
-    private String generateJwtToken(String username) {
-        Date now = new Date();
-        Date expiration = new Date(now.getTime() + EXPIRATION_TIME);
-        SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiration)
-                .signWith(key,SignatureAlgorithm.HS512)
-                .compact();
-    }
+
 }
 
