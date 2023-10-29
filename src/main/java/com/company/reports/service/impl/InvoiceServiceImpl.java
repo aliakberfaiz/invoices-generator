@@ -32,13 +32,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class InvoiceServiceImpl implements InvoiceService {
 	@Autowired
 	private InvoiceRepo invoiceRepo;
-
 	@Autowired
 	JasperReportExporterService reportExporter;
-	
 	@Autowired 
 	CompanyIOUtils companyIOUtils;
-
 	@Value("${company.reports.location}")
 	private String invoicesLocation;
 
